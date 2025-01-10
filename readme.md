@@ -2,11 +2,12 @@
 
 ## latest
 
+ - bin/pipeline.rs
  - working version in src/main.rs
 
 ## next steps
 
- - pipeline
+ - tidy up pipeline ??
 
 ## usage
 
@@ -18,7 +19,7 @@ cargo run --bin drainpipe
 
 ## read a file
 
-A more long-winded alternative to `fs::read_to_string(filename).expect("file not found?");`
+What is the effect of the block around `let mut file ... `?
 
 ```rust
 use std::{fs::File, io::Read};
