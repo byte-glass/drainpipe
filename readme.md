@@ -17,6 +17,18 @@ To run `./src/main.rs`,
 cargo run --bin drainpipe
 ```
 
+## counts as `reduce`
+
+apply `reduce` to iterator with closure over the hashmap?
+
+## style 'golf'
+
+```rust
+let s = fs::read_to_string("./stop_words.txt").expect("can't find stop_words.txt?");
+let ascii = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x",  "y", "z"];
+let stop_words = s.split(",").chain(ascii).collect::<Vec<&str>>();
+```
+
 ## style 'pipeline'
 
 this uses iterators over or vectors of `String`. the more monolithic (i.e. one lifetime?) version in main.rs can use `&str`, the references are good within the single scope -- try to understand this better!
