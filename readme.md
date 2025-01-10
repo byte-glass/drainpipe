@@ -17,6 +17,10 @@ To run `./src/main.rs`,
 cargo run --bin drainpipe
 ```
 
+## style 'pipeline'
+
+this uses iterators over or vectors of `String`. the more monolithic (i.e. one lifetime?) version in main.rs can use `&str`, the references are good within the single scope -- try to understand this better!
+
 ## read a file
 
 What is the effect of the block around `let mut file ... `?
