@@ -2,11 +2,14 @@
 
 ## latest
 
+ - bin/infinite_mirror.rs
  - bin/pipeline.rs
  - working version in src/main.rs
 
 ## next steps
 
+ - try kick_forward
+ - bin/the_one.rs - difficult
  - tidy up pipeline ??
 
 ## usage
@@ -17,9 +20,10 @@ To run `./src/main.rs`,
 cargo run --bin drainpipe
 ```
 
-## counts as `reduce`
+## todo
 
-apply `reduce` to iterator with closure over the hashmap?
+ - counts as `reduce`: apply `reduce` to iterator with closure over the hashmap?
+ - try pipeline with iterators over &str, this would require sorting out lifetimes!
 
 ## style 'golf'
 
