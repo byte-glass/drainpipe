@@ -2,13 +2,14 @@
 
 ## latest
 
+ - continuation passing is doomed
  - bin/infinite_mirror.rs
  - bin/pipeline.rs
  - working version in src/main.rs
 
 ## next steps
 
- - try kick_forward
+ - try `things`
  - bin/the_one.rs - difficult
  - tidy up pipeline ??
 
@@ -24,6 +25,10 @@ cargo run --bin drainpipe
 
  - counts as `reduce`: apply `reduce` to iterator with closure over the hashmap?
  - try pipeline with iterators over &str, this would require sorting out lifetimes!
+
+## continuation passing i.e. style 'kick-forward'
+
+the signature of the continuation must (?) reach all the way to the end of the computation!? this is not practical!!
 
 ## style 'golf'
 
