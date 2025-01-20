@@ -2,6 +2,7 @@
 
 ## latest
 
+ - bin/things.rs
  - continuation passing is doomed
  - bin/infinite_mirror.rs
  - bin/pipeline.rs
@@ -9,8 +10,10 @@
 
 ## next steps
 
- - try `things`
- - bin/the_one.rs - difficult
+ - duckdb
+ - web or http api, rocket?
+
+ - bin/the_one.rs - difficult?
  - tidy up pipeline ??
 
 ## usage
@@ -25,6 +28,21 @@ cargo run --bin drainpipe
 
  - counts as `reduce`: apply `reduce` to iterator with closure over the hashmap?
  - try pipeline with iterators over &str, this would require sorting out lifetimes!
+
+## borrowing collections - or `.into_iter()`
+
+what happens to say a hashmap when it is passed by reference (is this the rust jargon) to a function e.g.
+
+```rust
+let mut h = HashMap<String, i32>::new();
+<< data is added to h, then >>
+print_em(&h);
+```
+
+see `main.rs` and/or `bin/pipeline.rs`. it seems that `&h` has type `&HashMap<&String, &i32>`, in other words, 
+the keys and values in the map become `&_`. is this right?
+
+Or, is it to do with `.into_iter()`?
 
 ## continuation passing i.e. style 'kick-forward'
 
