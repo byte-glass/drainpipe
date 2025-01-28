@@ -1,8 +1,7 @@
 // things.rs
 
-use std::{fs::File, io::Read, collections::HashMap};
 use regex::Regex;
-
+use std::{collections::HashMap, fs::File, io::Read};
 
 struct DataStorageManager {
     data: String
@@ -17,16 +16,19 @@ impl DataStorageManager {
         }
         let re = Regex::new(r"[\W_]+").unwrap();
         data = re.replace_all(&data, " ").to_lowercase();
-        DataStorageManager { data: data }
+        DataStorageManager { data }
     }
 
     fn words(&self) -> Vec<String> {
-        self.data.split_whitespace().map(str::to_string).collect::<Vec<_>>()
+        self.data
+            .split_whitespace()
+            .map(str::to_string)
+            .collect::<Vec<_>>()
     }
 }
 
 struct StopWordManager {
-    stop_words: Vec<String>
+    stop_words: Vec<String>,
 }
 
 impl StopWordManager {
@@ -47,18 +49,20 @@ impl StopWordManager {
         self.stop_words.contains(w)
     }
 
-    fn _show(&self) -> () {
+    fn _show(&self) {
         println!("{:?}", self.stop_words);
     }
 }
 
 struct WordCountManager {
-    counts: HashMap<String, i32>
+    counts: HashMap<String, i32>,
 }
 
-impl WordCountManager{
+impl WordCountManager {
     fn new() -> Self {
-        WordCountManager { counts: HashMap::new() }
+        WordCountManager {
+            counts: HashMap::new(),
+        }
     }
 
     fn increment(&mut self, w: String) -> i32 {
@@ -67,15 +71,15 @@ impl WordCountManager{
         *count
     }
 
-    fn most_common(&self, n: usize) -> Vec<(&String, &i32)> { 
+    fn most_common(&self, n: usize) -> Vec<(&String, &i32)> {
         let mut v = self.counts.iter().collect::<Vec<_>>();
-        v.sort_by(|p, q| q.1.cmp(&p.1));
+        v.sort_by(|p, q| q.1.cmp(p.1));
         v.into_iter().take(n).collect()
     }
 
-    fn _more_common(&self, n: usize) -> Vec<(String, i32)> { 
+    fn _more_common(&self, n: usize) -> Vec<(String, i32)> {
         let mut v = self.counts.iter().collect::<Vec<_>>();
-        v.sort_by(|p, q| q.1.cmp(&p.1));
+        v.sort_by(|p, q| q.1.cmp(p.1));
         let mut r = Vec::new();
         for (w, k) in v.into_iter().take(n) {
             r.push((String::from(w), *k));
@@ -83,7 +87,7 @@ impl WordCountManager{
         r
     }
 
-    fn _show(&self) -> () {
+    fn _show(&self) {
         println!("{:?}", self.counts);
     }
 }
@@ -91,19 +95,19 @@ impl WordCountManager{
 struct WordFrequencyController {
     data_storage_manager: DataStorageManager,
     stop_word_manager: StopWordManager,
-    word_count_manager: WordCountManager
+    word_count_manager: WordCountManager,
 }
 
 impl WordFrequencyController {
     fn new(filename: &str) -> Self {
-        WordFrequencyController { 
+        WordFrequencyController {
             data_storage_manager: DataStorageManager::new(filename),
             stop_word_manager: StopWordManager::new(),
-            word_count_manager: WordCountManager::new()
+            word_count_manager: WordCountManager::new(),
         }
     }
 
-    fn run(&mut self) -> () {
+    fn run(&mut self) {
         for u in self.data_storage_manager.words() {
             if !self.stop_word_manager.is_stop_word(&u) {
                 self.word_count_manager.increment(u);

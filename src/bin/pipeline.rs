@@ -1,7 +1,7 @@
 // pipeline.rs
 
-use std::{fs::File, io::Read, collections::HashMap};
 use regex::Regex;
+use std::{collections::HashMap, fs::File, io::Read};
 
 fn read_file(filename: &str) -> String {
     let mut data = String::new();
@@ -9,7 +9,6 @@ fn read_file(filename: &str) -> String {
         let mut file = File::open(filename).unwrap();
         file.read_to_string(&mut data).unwrap();
     }
-    // why the block here??
     data
 }
 
@@ -18,11 +17,11 @@ fn filter_chars_and_normalize(data: String) -> String {
     re.replace_all(&data, " ").to_lowercase()
 }
 
-fn scan(data: &String) -> impl Iterator::<Item = String> + use<'_> {
+fn scan(data: &str) -> impl Iterator<Item = String> + use<'_> {
     data.split_whitespace().map(str::to_string)
 }
 
-fn remove_stop_words<T: Iterator<Item = String>>(words: T) -> impl Iterator::<Item = String> {
+fn remove_stop_words<T: Iterator<Item = String>>(words: T) -> impl Iterator<Item = String> {
     let mut s = String::new();
     {
         let mut file = File::open("./stop_words.txt").unwrap();
@@ -32,7 +31,7 @@ fn remove_stop_words<T: Iterator<Item = String>>(words: T) -> impl Iterator::<It
     for c in 'a'..='z' {
         t.push(c.to_string());
     }
-    words.filter(move |w| !t.contains(&w))
+    words.filter(move |w| !t.contains(w))
 }
 
 fn counts<T: Iterator<Item = String>>(words: T) -> HashMap<String, i32> {
@@ -52,8 +51,10 @@ fn sort(counts: HashMap<String, i32>) -> Vec<(String, i32)> {
 
 fn main() {
     let filename = "pride-and-prejudice.txt";
-    let z = sort(counts(remove_stop_words(scan(&filter_chars_and_normalize(read_file(&filename))))));
-    
+    let z = sort(counts(remove_stop_words(scan(
+        &filter_chars_and_normalize(read_file(filename)),
+    ))));
+
     for (k, n) in &z[0..25] {
         println!("{} - {}", k, n);
     }
