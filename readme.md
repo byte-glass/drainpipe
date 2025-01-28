@@ -2,27 +2,21 @@
 
 ## latest
 
+ - clippy!
  - bin/things.rs
  - continuation passing is doomed
  - bin/infinite_mirror.rs
- - bin/pipeline.rs
- - working version in src/main.rs
 
 ## next steps
 
- - duckdb
+ - language server
+
+ - polars
+ - duckdb, postgres
  - web or http api, rocket?
 
  - bin/the_one.rs - difficult?
  - tidy up pipeline ??
-
-## usage
-
-To run `./src/main.rs`,
-
-```sh
-cargo run --bin drainpipe
-```
 
 ## todo
 
