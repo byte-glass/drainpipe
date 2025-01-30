@@ -2,6 +2,7 @@
 
 ## latest
 
+ - bin/norse.rs, persistent tables style using polars
  - clippy!
  - bin/things.rs
  - continuation passing is doomed
@@ -11,7 +12,6 @@
 
  - language server
 
- - polars
  - duckdb, postgres
  - web or http api, rocket?
 
@@ -20,6 +20,7 @@
 
 ## todo
 
+ - find alternative to `.get_row` in polars, see bin/norse.rs
  - counts as `reduce`: apply `reduce` to iterator with closure over the hashmap?
  - try pipeline with iterators over &str, this would require sorting out lifetimes!
 
