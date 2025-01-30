@@ -4,7 +4,7 @@ use regex::Regex;
 use std::{collections::HashMap, fs::File, io::Read};
 
 struct DataStorageManager {
-    data: String
+    data: String,
 }
 
 impl DataStorageManager {

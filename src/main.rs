@@ -24,10 +24,7 @@ fn main() {
     let words = re.replace_all(&data, " ").to_lowercase();
 
     let mut h = HashMap::new();
-    for w in words
-        .split_whitespace()
-        .filter(|w| !stop_words.contains(w))
-    {
+    for w in words.split_whitespace().filter(|w| !stop_words.contains(w)) {
         let count = h.entry(w).or_insert(0);
         *count += 1;
     }
